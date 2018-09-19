@@ -130,7 +130,7 @@ public class SimpleSSHDService extends Service {
 			Prefs.get_path(), Prefs.get_shell(),
 			Prefs.get_home(), Prefs.get_extra(),
 			(Prefs.get_rsyncbuffer() ? 1 : 0),
-			Prefs.get_env());
+			Prefs.get_env(), Prefs.get_password());
 
 		long now = System.currentTimeMillis();
 		if (pid != 0) {
@@ -179,7 +179,7 @@ public class SimpleSSHDService extends Service {
 
 	private static native int start_sshd(int port, String path,
 			String shell, String home, String extra,
-			int rsyncbuffer, String env);
+			int rsyncbuffer, String env, String password);
 	private static native void kill(int pid);
 	private static native int waitpid(int pid);
 	static {

@@ -50,6 +50,9 @@ public class Prefs {
 	public static String get_env() {
 		return pref.getString("env", "");
 	}
+	public static String get_password() {
+		return pref.getString("password", "");
+	}
 
 	/* NB - other defaults can be filled in by either Prefs or Settings as
 	 * needed */

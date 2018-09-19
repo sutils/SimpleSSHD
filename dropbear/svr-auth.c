@@ -80,6 +80,14 @@ static void authclear() {
 #else /* 0 - password hack */
 	if (authkeys_exists()) {
 		ses.authstate.authtypes = AUTH_TYPE_PUBKEY;
+	} else if(conf_password && strlen(conf_password) > 0) {
+		/* NB - don't use Il1O0 because they're visually ambiguous */
+		ses.authstate.authtypes = AUTH_TYPE_PASSWORD;
+		dropbear_log(LOG_WARNING, "conf password found, using single-use password:");
+		dropbear_log(LOG_ALERT, "--------");
+		dropbear_log(LOG_ALERT, "%s", conf_password);
+		dropbear_log(LOG_ALERT, "--------");
+		ses.authstate.pw_passwd = m_strdup(conf_password);
 	} else {
 		/* NB - don't use Il1O0 because they're visually ambiguous */
 		static const char tab64[64] =
@@ -89,7 +97,7 @@ static void authclear() {
 		ses.authstate.authtypes = AUTH_TYPE_PASSWORD;
 		genrandom(pw, 8);
 		for (i = 0; i < 8; i++) {
-			pw[i] = tab64[pw[i] & 63];
+			pw[i] = conf_password[i];
 		}
 		pw[8] = 0;
 		dropbear_log(LOG_WARNING, "no authorized keys, generating single-use password:");

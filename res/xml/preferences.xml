@@ -54,5 +54,11 @@
 	android:title="Login Shell"
 	android:summary="Location of sh binary."
 	android:defaultValue="/system/bin/sh" />
+	<EditTextPreference
+	android:key="password"
+	android:title="Login Password(8 character)"
+	android:summary="Password of login user"
+	android:maxLength="8"
+	android:defaultValue="" />
   </PreferenceCategory>
 </PreferenceScreen>

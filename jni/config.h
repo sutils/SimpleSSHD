@@ -42,6 +42,7 @@ extern const char *conf_home;
 const char *conf_path_file(const char *fn);
 extern int conf_rsyncbuffer;
 extern const char *conf_env;
+extern const char *conf_password;
 
 
 #endif /* __CONFIG_H__ */
